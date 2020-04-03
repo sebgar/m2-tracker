@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sga_tracker>
+            <blocktype>
+                <default>
+                    <block>\Sga\Tracker\Block\Tag\DefaultType</block>
+                    <label>Default</label>
+                </default>
+                <category>
+                    <block>\Sga\Tracker\Block\Tag\Category</block>
+                    <label>Current Category</label>
+                </category>
+                <product>
+                    <block>\Sga\Tracker\Block\Tag\Product</block>
+                    <label>Current Product</label>
+                </product>
+                <search>
+                    <block>\Sga\Tracker\Block\Tag\Search</block>
+                    <label>Search</label>
+                </search>
+                <checkout>
+                    <block>\Sga\Tracker\Block\Tag\Checkout</block>
+                    <label>Checkout</label>
+                </checkout>
+                <order>
+                    <block>\Sga\Tracker\Block\Tag\Order</block>
+                    <label>Order</label>
+                </order>
+            </blocktype>
+            <location>
+                <head>
+                    <label>In Head</label>
+                </head>
+                <after_body_start>
+                    <label>After Body Start</label>
+                </after_body_start>
+                <before_body_end>
+                    <label>Before Body End</label>
+                </before_body_end>
+                <!--<checkout_login>
+                    <label>Checkout Login</label>
+                    <url>tracker/checkout_onepage/login</url>
+                    <code>login</code>
+                </checkout_login>
+                <checkout_billing>
+                    <label>Checkout Billing</label>
+                    <url>tracker/checkout_onepage/billing</url>
+                    <code>billing</code>
+                </checkout_billing>
+                <checkout_shipping>
+                    <label>Checkout Shipping</label>
+                    <url>tracker/checkout_onepage/shipping</url>
+                    <code>shipping</code>
+                </checkout_shipping>
+                <checkout_shipping_method>
+                    <label>Checkout Shipping Method</label>
+                    <url>tracker/checkout_onepage/shipping_method</url>
+                    <code>shipping_method</code>
+                </checkout_shipping_method>
+                <checkout_payment>
+                    <label>Checkout Payment</label>
+                    <url>tracker/checkout_onepage/payment</url>
+                    <code>payment</code>
+                </checkout_payment>
+                <checkout_review>
+                    <label>Checkout Review</label>
+                    <url>tracker/checkout_onepage/review</url>
+                    <code>review</code>
+                </checkout_review>-->
+            </location>
+        </sga_tracker>
+    </default>
+</config>

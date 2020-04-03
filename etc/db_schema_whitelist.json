@@ -1,0 +1,46 @@
+{
+
+    "sga_tracker_tag": {
+        "column": {
+            "is_active": true,
+            "identifier": true,
+            "name": true,
+            "position": true,
+            "location": true,
+            "block_type": true,
+            "content": true,
+            "hide_null_tags": true,
+            "format_serialized": true,
+            "mapping_serialized": true,
+            "all_url": true,
+            "url": true,
+            "url_excluded": true,
+            "all_categories": true,
+            "categories_ids": true,
+            "all_products_cat": true,
+            "product_ids": true,
+            "skus": true,
+            "cms_page_ids": true,
+            "all_cms_pages": true,
+            "created_at": true,
+            "updated_at": true,
+
+            "tag_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+
+    "sga_tracker_tag_store": {
+        "column": {
+            "tag_id": true,
+            "store_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_SGA_TRACKER_TAG_STORE_STORE_ID_STORE_ID": true,
+            "FK_SGA_TRACKER_TAG_STORE_TAG_ID_TAG_ID": true
+        }
+    }
+}

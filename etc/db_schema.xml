@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="sga_tracker_tag" resource="default" engine="innodb" comment="TRACKER tag">
+        <column xsi:type="int" name="tag_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="tinyint" name="is_active" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="Is active" />
+        <column xsi:type="varchar" name="identifier" length="255" nullable="false" default="" comment="Identifier" />
+        <column xsi:type="varchar" name="name" length="255" nullable="false" default="255" comment="Name" />
+        <column xsi:type="int" name="position" padding="10" unsigned="true" nullable="false" identity="false" default="1" comment="Position" />
+        <column xsi:type="varchar" name="location" length="255" nullable="false" default="" comment="Location" />
+        <column xsi:type="varchar" name="block_type" length="255" nullable="false" default="" comment="Block Type" />
+        <column xsi:type="text" name="content" nullable="false" default="" comment="Content" />
+        <column xsi:type="tinyint" name="hide_null_tags" padding="1" unsigned="true" nullable="false" identity="false" default="1" comment="Hide Null Tags" />
+        <column xsi:type="text" name="format_serialized" nullable="true" default="" comment="Format" />
+        <column xsi:type="text" name="mapping_serialized" nullable="true" default="" comment="Mapping" />
+        <column xsi:type="tinyint" name="all_url" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="All Url" />
+        <column xsi:type="text" name="url" nullable="true" default="" comment="Urls" />
+        <column xsi:type="text" name="url_excluded" nullable="true" default="" comment="Urls Excluded" />
+        <column xsi:type="tinyint" name="all_categories" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="All Categories" />
+        <column xsi:type="text" name="categories_ids" nullable="true" default="" comment="Categories" />
+        <column xsi:type="tinyint" name="all_products_cat" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="All products In Categories" />
+        <column xsi:type="text" name="product_ids" nullable="true" default="" comment="Product Categories" />
+        <column xsi:type="text" name="skus" nullable="false" default="" comment="Skus" />
+        <column xsi:type="text" name="cms_page_ids" nullable="true" default="" comment="Cms Page" />
+        <column xsi:type="tinyint" name="all_cms_pages" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="All Cms Pages" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At" />
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="tag_id"/>
+        </constraint>
+    </table>
+
+    <table name="sga_tracker_tag_store" resource="default" engine="innodb" comment="TRACKER tag store">
+        <column xsi:type="int" name="tag_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Tag Id"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Store Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="tag_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_SGA_TRACKER_TAG_STORE_STORE_ID_STORE_ID"
+                    table="sga_tracker_tag_store" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_SGA_TRACKER_TAG_STORE_TAG_ID_TAG_ID"
+                    table="sga_tracker_tag_store" column="tag_id" referenceTable="sga_tracker_tag"
+                    referenceColumn="tag_id" onDelete="CASCADE"/>
+    </table>
+
+
+</schema>

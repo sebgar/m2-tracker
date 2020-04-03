@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">tracker_tag_form.tracker_tag_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Sga\Tracker\Block\Adminhtml\Tag\Edit\SaveButton"/>
+            <button name="delete" class="Sga\Tracker\Block\Adminhtml\Tag\Edit\DeleteButton"/>
+            <button name="back" class="Sga\Tracker\Block\Adminhtml\Tag\Edit\BackButton"/>
+        </buttons>
+        <namespace>tracker_tag_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>tracker_tag_form.tracker_tag_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="tracker_tag_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="tracker/tag/save"/>
+        </settings>
+        <dataProvider class="Sga\Tracker\Model\Tag\DataProvider" name="tracker_tag_form_data_source">
+            <settings>
+                <requestFieldName>tag_id</requestFieldName>
+                <primaryFieldName>tag_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general">
+        <settings>
+            <label>General</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
+
+        <field name="tag_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>tag_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="is_active" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Is active</label>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="identifier" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <validation><rule name="required-entry" xsi:type="boolean">true</rule></validation>
+                <dataType>text</dataType>
+                <label translate="true">Identifier</label>
+                <dataScope>identifier</dataScope>
+            </settings>
+        </field>
+
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <validation><rule name="required-entry" xsi:type="boolean">true</rule></validation>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+
+        <field name="position" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <validation><rule name="required-entry" xsi:type="boolean">true</rule></validation>
+                <dataType>text</dataType>
+                <label translate="true">Position</label>
+                <dataScope>position</dataScope>
+            </settings>
+        </field>
+
+        <field name="storeviews" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>int</dataType>
+                <label translate="true">Store View</label>
+                <dataScope>store_id</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Sga\Tracker\Ui\Component\Listing\Column\Stores"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <fieldset name="frontend">
+        <settings>
+            <label>Frontend</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="location" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Location</label>
+                <dataScope>location</dataScope>
+                <validation><rule name="required-entry" xsi:type="boolean">true</rule></validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Sga\Tracker\Model\Source\Tag\Location"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="block_type" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Block Type</label>
+                <dataScope>block_type</dataScope>
+                <validation><rule name="required-entry" xsi:type="boolean">true</rule></validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Sga\Tracker\Model\Source\Tag\Blocktype"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="content" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <validation><rule name="required-entry" xsi:type="boolean">true</rule></validation>
+                <dataType>text</dataType>
+                <label translate="true">Content</label>
+                <dataScope>content</dataScope>
+            </settings>
+        </field>
+
+        <field name="hide_null_tags" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Hide Null Tags</label>
+                <dataScope>hide_null_tags</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <!--<fieldset name="format">
+        <settings>
+            <label>Format</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="format_serialized" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Format</label>
+                <dataScope>format_serialized</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="mapping">
+        <settings>
+            <label>Mapping</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="mapping_serialized" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Mapping</label>
+                <dataScope>mapping_serialized</dataScope>
+            </settings>
+        </field>
+    </fieldset>-->
+
+    <fieldset name="filter_urls">
+        <settings>
+            <label>Filter Urls</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="all_url" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">All Url</label>
+                <dataScope>all_url</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="url" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Urls</label>
+                <notice translate="true">One Per Line</notice>
+                <dataScope>url</dataScope>
+            </settings>
+        </field>
+
+        <field name="url_excluded" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Urls Excluded</label>
+                <notice translate="true">One Per Line</notice>
+                <dataScope>url_excluded</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="filter_categories">
+        <settings>
+            <label>Filter Categories</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="all_categories" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">All Categories</label>
+                <dataScope>all_categories</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="categories_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Catalog\Ui\Component\Product\Form\Categories\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Categories</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Catalog/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="dataScope" xsi:type="string">categories_ids</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+            </argument>
+        </field>Magento_Ui/js/form/element/ui-select
+
+        <field name="all_products_cat" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">All products In Categories</label>
+                <dataScope>all_products_cat</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="product_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Catalog\Ui\Component\Product\Form\Categories\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Product Categories</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Catalog/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="dataScope" xsi:type="string">product_ids</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+
+    <fieldset name="filter_products">
+        <settings>
+            <label>Filter Products</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="skus" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Skus</label>
+                <notice translate="true">One Per Line</notice>
+                <dataScope>skus</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="filter_cms_pages">
+        <settings>
+            <label>Filter Cms Pages</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="all_cms_pages" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">All Cms Pages</label>
+                <dataScope>all_cms_pages</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="cms_page_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Model\Config\Source\Page</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Cms Pages</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="dataScope" xsi:type="string">cms_page_ids</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,6 @@
+<?php
+/** @var \Sga\Tracker\Block\Tag $block */
+?>
+<?php foreach($block->getTags() as $tag): ?>
+    <?php echo $block->getBlockTag($tag)->toHtml() ?>
+<?php endforeach ?>
