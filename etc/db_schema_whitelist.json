@@ -1,5 +1,4 @@
 {
-
     "sga_tracker_tag": {
         "column": {
             "is_active": true,
@@ -24,14 +23,12 @@
             "all_cms_pages": true,
             "created_at": true,
             "updated_at": true,
-
             "tag_id": true
         },
         "constraint": {
             "PRIMARY": true
         }
     },
-
     "sga_tracker_tag_store": {
         "column": {
             "tag_id": true,
@@ -40,7 +37,9 @@
         "constraint": {
             "PRIMARY": true,
             "FK_SGA_TRACKER_TAG_STORE_STORE_ID_STORE_ID": true,
-            "FK_SGA_TRACKER_TAG_STORE_TAG_ID_TAG_ID": true
+            "FK_SGA_TRACKER_TAG_STORE_TAG_ID_TAG_ID": true,
+            "SGA_TRACKER_TAG_STORE_STORE_ID_STORE_STORE_ID": true,
+            "SGA_TRACKER_TAG_STORE_TAG_ID_SGA_TRACKER_TAG_TAG_ID": true
         }
     }
 }

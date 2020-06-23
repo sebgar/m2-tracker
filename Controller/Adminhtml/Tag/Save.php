@@ -2,32 +2,11 @@
 namespace Sga\Tracker\Controller\Adminhtml\Tag;
 
 use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
-use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Backend\App\Action\Context;
-use Sga\Tracker\Api\TagRepositoryInterface as ModelRepositoryInterface;
-use Sga\Tracker\Model\TagFactory as ModelFactory;
 use Sga\Tracker\Controller\Adminhtml\Tag as ParentClass;
 
 class Save extends ParentClass implements HttpPostActionInterface
 {
-    protected $dataPersistor;
-    private $modelFactory;
-    private $modelRepository;
-
-    public function __construct(
-        Context $context,
-        DataPersistorInterface $dataPersistor,
-        ModelFactory $modelFactory,
-        ModelRepositoryInterface $modelRepository
-    ) {
-        $this->dataPersistor = $dataPersistor;
-        $this->modelFactory = $modelFactory;
-        $this->modelRepository = $modelRepository;
-
-        parent::__construct($context);
-    }
-
     public function execute()
     {
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
@@ -41,12 +20,12 @@ class Save extends ParentClass implements HttpPostActionInterface
                 $data['tag_id'] = null;
             }
 
-            $model = $this->modelFactory->create();
+            $model = $this->_modelFactory->create();
 
             $id = $this->getRequest()->getParam('tag_id');
             if ($id) {
                 try {
-                    $model = $this->modelRepository->getById($id);
+                    $model = $this->_modelRepository->getById($id);
                 } catch (LocalizedException $e) {
                     $this->messageManager->addErrorMessage(__('This tag no longer exists.'));
                     return $resultRedirect->setPath('*/*/');
@@ -56,9 +35,9 @@ class Save extends ParentClass implements HttpPostActionInterface
             $model->setData($data);
 
             try {
-                $this->modelRepository->save($model);
+                $this->_modelRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the tag.'));
-                $this->dataPersistor->clear('tracker_tag');
+                $this->_dataPersistor->clear('tracker_tag');
                 return $this->processReturn($model, $data, $resultRedirect);
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
@@ -66,7 +45,7 @@ class Save extends ParentClass implements HttpPostActionInterface
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the tag.'));
             }
 
-            $this->dataPersistor->set('tracker_tag', $data);
+            $this->_dataPersistor->set('tracker_tag', $data);
             return $resultRedirect->setPath('*/*/edit', ['tag_id' => $id]);
         }
         return $resultRedirect->setPath('*/*/');
@@ -81,14 +60,14 @@ class Save extends ParentClass implements HttpPostActionInterface
         } else if ($redirect === 'close') {
             $resultRedirect->setPath('*/*/');
         } else if ($redirect === 'duplicate') {
-            $duplicateModel = $this->modelFactory->create(['data' => $data]);
+            $duplicateModel = $this->_modelFactory->create(['data' => $data]);
             $duplicateModel->setId(null);
             $duplicateModel->setIsActive(0);
-            $this->modelRepository->save($duplicateModel);
+            $this->_modelRepository->save($duplicateModel);
 
             $id = $duplicateModel->getId();
             $this->messageManager->addSuccessMessage(__('You duplicated the tag.'));
-            $this->dataPersistor->set('tracker_tag', $data);
+            $this->_dataPersistor->set('tracker_tag', $data);
             $resultRedirect->setPath('*/*/edit', ['tag_id' => $id]);
         }
         return $resultRedirect;

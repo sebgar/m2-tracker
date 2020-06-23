@@ -1,23 +1,10 @@
 <?php
 namespace Sga\Tracker\Controller\Adminhtml\Tag;
 
-use Magento\Backend\App\Action\Context;
-use Sga\Tracker\Api\TagRepositoryInterface as ModelRepository;
 use Sga\Tracker\Controller\Adminhtml\Tag as ParentClass;
 
 class InlineEdit extends ParentClass
 {
-    protected $_modelRepository;
-
-    public function __construct(
-        Context $context,
-        ModelRepository $modelRepository
-    ) {
-        $this->_modelRepository = $modelRepository;
-
-        parent::__construct($context);
-    }
-
     public function execute()
     {
         $resultJson = $this->_jsonFactory->create();

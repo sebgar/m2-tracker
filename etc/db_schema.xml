@@ -3,26 +3,26 @@
 
     <table name="sga_tracker_tag" resource="default" engine="innodb" comment="TRACKER tag">
         <column xsi:type="int" name="tag_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
-        <column xsi:type="tinyint" name="is_active" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="Is active" />
-        <column xsi:type="varchar" name="identifier" length="255" nullable="false" default="" comment="Identifier" />
+        <column xsi:type="tinyint" name="is_active" unsigned="true" nullable="false" identity="false" default="0" comment="Is active" />
+        <column xsi:type="varchar" name="identifier" length="255" nullable="false" comment="Identifier" />
         <column xsi:type="varchar" name="name" length="255" nullable="false" default="255" comment="Name" />
         <column xsi:type="int" name="position" padding="10" unsigned="true" nullable="false" identity="false" default="1" comment="Position" />
-        <column xsi:type="varchar" name="location" length="255" nullable="false" default="" comment="Location" />
-        <column xsi:type="varchar" name="block_type" length="255" nullable="false" default="" comment="Block Type" />
-        <column xsi:type="text" name="content" nullable="false" default="" comment="Content" />
-        <column xsi:type="tinyint" name="hide_null_tags" padding="1" unsigned="true" nullable="false" identity="false" default="1" comment="Hide Null Tags" />
-        <column xsi:type="text" name="format_serialized" nullable="true" default="" comment="Format" />
-        <column xsi:type="text" name="mapping_serialized" nullable="true" default="" comment="Mapping" />
-        <column xsi:type="tinyint" name="all_url" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="All Url" />
-        <column xsi:type="text" name="url" nullable="true" default="" comment="Urls" />
-        <column xsi:type="text" name="url_excluded" nullable="true" default="" comment="Urls Excluded" />
-        <column xsi:type="tinyint" name="all_categories" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="All Categories" />
-        <column xsi:type="text" name="categories_ids" nullable="true" default="" comment="Categories" />
-        <column xsi:type="tinyint" name="all_products_cat" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="All products In Categories" />
-        <column xsi:type="text" name="product_ids" nullable="true" default="" comment="Product Categories" />
-        <column xsi:type="text" name="skus" nullable="false" default="" comment="Skus" />
-        <column xsi:type="text" name="cms_page_ids" nullable="true" default="" comment="Cms Page" />
-        <column xsi:type="tinyint" name="all_cms_pages" padding="1" unsigned="true" nullable="false" identity="false" default="0" comment="All Cms Pages" />
+        <column xsi:type="varchar" name="location" length="255" nullable="false" comment="Location" />
+        <column xsi:type="varchar" name="block_type" length="255" nullable="false" comment="Block Type" />
+        <column xsi:type="text" name="content" nullable="false" comment="Content" />
+        <column xsi:type="tinyint" name="hide_null_tags" unsigned="true" nullable="false" identity="false" default="1" comment="Hide Null Tags" />
+        <column xsi:type="text" name="format_serialized" nullable="true" comment="Format" />
+        <column xsi:type="text" name="mapping_serialized" nullable="true" comment="Mapping" />
+        <column xsi:type="tinyint" name="all_url" unsigned="true" nullable="false" identity="false" default="0" comment="All Url" />
+        <column xsi:type="text" name="url" nullable="true" comment="Urls" />
+        <column xsi:type="text" name="url_excluded" nullable="true" comment="Urls Excluded" />
+        <column xsi:type="tinyint" name="all_categories" unsigned="true" nullable="false" identity="false" default="0" comment="All Categories" />
+        <column xsi:type="text" name="categories_ids" nullable="true" comment="Categories" />
+        <column xsi:type="tinyint" name="all_products_cat" unsigned="true" nullable="false" identity="false" default="0" comment="All products In Categories" />
+        <column xsi:type="text" name="product_ids" nullable="true" comment="Product Categories" />
+        <column xsi:type="text" name="skus" nullable="false" comment="Skus" />
+        <column xsi:type="text" name="cms_page_ids" nullable="true" comment="Cms Page" />
+        <column xsi:type="tinyint" name="all_cms_pages" unsigned="true" nullable="false" identity="false" default="0" comment="All Cms Pages" />
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At" />
         <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At" />
         <constraint xsi:type="primary" referenceId="PRIMARY">

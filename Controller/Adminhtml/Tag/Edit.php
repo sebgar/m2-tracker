@@ -2,7 +2,6 @@
 namespace Sga\Tracker\Controller\Adminhtml\Tag;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Sga\Tracker\Model\Tag as Model;
 use Sga\Tracker\Controller\Adminhtml\Tag as ParentClass;
 
 class Edit extends ParentClass implements HttpGetActionInterface
@@ -10,8 +9,7 @@ class Edit extends ParentClass implements HttpGetActionInterface
     public function execute()
     {
         $id = $this->getRequest()->getParam('tag_id');
-        $model = $this->_objectManager->create(Model::class);
-
+        $model = $this->_modelFactory->create();
         if ($id) {
             $model->load($id);
             if (!$model->getId()) {

@@ -3,7 +3,6 @@ namespace Sga\Tracker\Controller\Adminhtml\Tag;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Sga\Tracker\Controller\Adminhtml\Tag as ParentClass;
-use Sga\Tracker\Model\Tag as Model;
 
 class Delete extends ParentClass implements HttpPostActionInterface
 {
@@ -20,7 +19,7 @@ class Delete extends ParentClass implements HttpPostActionInterface
         $id = $this->getRequest()->getParam('tag_id');
         if ($id) {
             try {
-                $model = $this->_objectManager->create(Model::class);
+                $model = $this->_modelFactory->create();
                 $model->load($id);
                 $model->delete();
 

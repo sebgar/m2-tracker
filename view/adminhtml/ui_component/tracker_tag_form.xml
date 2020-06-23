@@ -394,7 +394,7 @@
                     </item>
                 </item>
             </argument>
-        </field>Magento_Ui/js/form/element/ui-select
+        </field>
 
         <field name="all_products_cat" formElement="checkbox">
             <argument name="data" xsi:type="array">

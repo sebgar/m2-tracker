@@ -4,15 +4,14 @@ namespace Sga\Tracker\Ui\Component;
 use Magento\Framework\Api\Filter;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilder;
-use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\AuthorizationInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
 
 class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {
-    private $authorization;
-    private $additionalFilterPool;
+    protected $_authorization;
+    protected $_additionalFilterPool;
 
     public function __construct(
         $name,
@@ -22,6 +21,7 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
         SearchCriteriaBuilder $searchCriteriaBuilder,
         RequestInterface $request,
         FilterBuilder $filterBuilder,
+        AuthorizationInterface $authorization,
         array $meta = [],
         array $data = [],
         array $additionalFilterPool = []
@@ -38,23 +38,16 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
             $data
         );
 
+        $this->_authorization = $authorization;
         $this->meta = array_replace_recursive($meta, $this->prepareMetadata());
-        $this->additionalFilterPool = $additionalFilterPool;
-    }
-
-    private function getAuthorizationInstance()
-    {
-        if ($this->authorization === null) {
-            $this->authorization = ObjectManager::getInstance()->get(AuthorizationInterface::class);
-        }
-        return $this->authorization;
+        $this->_additionalFilterPool = $additionalFilterPool;
     }
 
     public function prepareMetadata()
     {
         $metadata = [];
 
-        if (!$this->getAuthorizationInstance()->isAllowed('Sga_Tracker::tracker')) {
+        if (!$this->_authorization->isAllowed('Sga_Tracker::tracker')) {
             $metadata = [
                 'tracker_tag_columns' => [
                     'arguments' => [
@@ -67,7 +60,6 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
                         ]
                     ]
                 ],
-                
             ];
         }
 
@@ -76,8 +68,8 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
 
     public function addFilter(Filter $filter)
     {
-        if (!empty($this->additionalFilterPool[$filter->getField()])) {
-            $this->additionalFilterPool[$filter->getField()]->addFilter($this->searchCriteriaBuilder, $filter);
+        if (!empty($this->_additionalFilterPool[$filter->getField()])) {
+            $this->_additionalFilterPool[$filter->getField()]->addFilter($this->searchCriteriaBuilder, $filter);
         } else {
             parent::addFilter($filter);
         }
