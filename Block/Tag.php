@@ -7,14 +7,14 @@ use Magento\Framework\Registry;
 use Magento\Cms\Model\Template\FilterProvider;
 use Sga\Tracker\Helper\Data;
 use Sga\Tracker\Model\Tag as TagModel;
-use Sga\Tracker\Model\ResourceModel\Tag\Collection as TagCollection;
+use Sga\Tracker\Model\ResourceModel\Tag\CollectionFactory as TagCollectionFactory;
 
 class Tag extends \Magento\Framework\View\Element\Template
 {
     protected $_helperData;
     protected $_jsonSerializer;
     protected $_filterProvider;
-    protected $_tagCollection;
+    protected $_tagCollectionFactory;
     protected $_coreRegistry;
     protected $_cmsPage;
 
@@ -26,18 +26,19 @@ class Tag extends \Magento\Framework\View\Element\Template
         Data $helperData,
         Json $jsonSerializer,
         FilterProvider $filterProvider,
-        TagCollection $tagCollection,
+        TagCollectionFactory $tagCollectionFactory,
         Registry $registry,
-        \Magento\Cms\Model\Page $cmsPage
+        \Magento\Cms\Model\Page $cmsPage,
+        array $data = []
     ) {
         $this->_helperData = $helperData;
         $this->_jsonSerializer = $jsonSerializer;
         $this->_filterProvider = $filterProvider;
-        $this->_tagCollection = $tagCollection;
+        $this->_tagCollectionFactory = $tagCollectionFactory;
         $this->_coreRegistry = $registry;
         $this->_cmsPage = $cmsPage;
 
-        parent::__construct($context);
+        parent::__construct($context, $data);
     }
 
     public function getJsonSerializer()
@@ -60,7 +61,7 @@ class Tag extends \Magento\Framework\View\Element\Template
 
     public function getTags()
     {
-        $collection = clone $this->_tagCollection;
+        $collection = $this->_tagCollectionFactory->create();
 
         $category = $this->_coreRegistry->registry('current_category');
         $product = $this->_coreRegistry->registry('current_product');
@@ -98,7 +99,7 @@ class Tag extends \Magento\Framework\View\Element\Template
             // add cms page filter
             if ($keyAction === 'cms_index_index' || $keyAction === 'cms_page_view') {
                 if ($this->_cmsPage instanceof \Magento\Cms\Model\Page && $this->_cmsPage->getId() > 0) {
-                    $this->_tagCollection->addCmsPageFilter($this->_cmsPage);
+                    $collection->addCmsPageFilter($this->_cmsPage);
                 }
             }
         }
@@ -107,10 +108,6 @@ class Tag extends \Magento\Framework\View\Element\Template
         $collection->addOrder('position', 'ASC');
 
         $items = $collection->getItems();
-
-        /*if (Mage::getSingleton('sgatracker/config')->isDebug()) {
-            Mage::log($this->_tagCollection->getSelect()->assemble(), null, 'sgatracker.log');
-        }*/
 
         return $items;
     }

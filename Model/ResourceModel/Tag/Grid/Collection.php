@@ -20,11 +20,11 @@ class Collection extends TagCollection implements SearchResultInterface
         $eventPrefix,
         $eventObject,
         $resourceModel,
+        \Magento\Framework\App\RequestInterface $request,
+        \Magento\Framework\UrlInterface $urlBuilder,
         $model = \Magento\Framework\View\Element\UiComponent\DataProvider\Document::class,
         $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null,
-        \Magento\Framework\App\RequestInterface $request,
-        \Magento\Framework\UrlInterface $urlBuilder
+        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct(
             $entityFactory,
@@ -33,10 +33,10 @@ class Collection extends TagCollection implements SearchResultInterface
             $eventManager,
             $storeManager,
             $metadataPool,
-            $connection,
-            $resource,
             $request,
-            $urlBuilder
+            $urlBuilder,
+            $connection,
+            $resource
         );
         $this->_eventPrefix = $eventPrefix;
         $this->_eventObject = $eventObject;
