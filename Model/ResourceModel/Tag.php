@@ -58,7 +58,7 @@ class Tag extends AbstractDb
         }
 
         // convert url
-        $urls = explode(',', $object->getUrl());
+        $urls = explode(',', (string)$object->getUrl());
         $tmp = array();
         foreach ($urls as $url) {
             $tmp[] = trim($url);
@@ -66,7 +66,7 @@ class Tag extends AbstractDb
         $object->setUrl(implode("\n", $tmp));
 
         // convert url excluded
-        $urls = explode(',', $object->getUrlExcluded());
+        $urls = explode(',', (string)$object->getUrlExcluded());
         $tmp = array();
         foreach ($urls as $url) {
             $tmp[] = trim($url);
@@ -74,7 +74,7 @@ class Tag extends AbstractDb
         $object->setUrlExcluded(implode("\n", $tmp));
 
         // convert skus
-        $skus = explode(',', $object->getSkus());
+        $skus = explode(',', (string)$object->getSkus());
         $tmp = array();
         foreach ($skus as $sku) {
             $tmp[] = trim($sku);
