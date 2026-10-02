@@ -30,8 +30,8 @@ class Collection extends AbstractCollection
         \Magento\Framework\EntityManager\MetadataPool $metadataPool,
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\UrlInterface $urlBuilder,
-        \Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+        ?\Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
+        ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         $this->storeManager = $storeManager;
         $this->metadataPool = $metadataPool;

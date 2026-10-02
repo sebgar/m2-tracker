@@ -24,7 +24,7 @@ class Collection extends TagCollection implements SearchResultInterface
         \Magento\Framework\UrlInterface $urlBuilder,
         $model = \Magento\Framework\View\Element\UiComponent\DataProvider\Document::class,
         $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+        ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct(
             $entityFactory,
@@ -59,7 +59,7 @@ class Collection extends TagCollection implements SearchResultInterface
         return null;
     }
 
-    public function setSearchCriteria(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)
+    public function setSearchCriteria(?\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)
     {
         return $this;
     }
@@ -74,7 +74,7 @@ class Collection extends TagCollection implements SearchResultInterface
         return $this;
     }
 
-    public function setItems(array $items = null)
+    public function setItems(?array $items = null)
     {
         return $this;
     }
